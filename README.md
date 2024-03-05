@@ -49,7 +49,7 @@ with this design we can easily define the fields we want to use in the REST serv
 
 ### Swagger UI
 The URL to see the Swagger UI is
-http://moves.testmycloud.net/swagger-ui/index.html
+http://movies.testmycloud.net/swagger-ui/index.html
 
 ### Github
 There is github action to build and run the tests in this project 
