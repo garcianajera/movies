@@ -52,7 +52,25 @@ The URL to see the Swagger UI is
 http://movies.testmycloud.net/swagger-ui/index.html
 
 ### Github
-There is github action to build and run the tests in this project 
+There is github action to build and run the tests in this project
+https://github.com/garcianajera/movies/actions
+
+### Testing Requirements
+
+* List all of the available Movie pictures grouped by Release year
+  * We use a release year entity to group movies by year. Results order by year and movie rating
+    http://movies.testmycloud.net/api/releaseYears
+* List all of the available Movie pictures of a particular Release year
+    http://movies.testmycloud.net/api/releaseYears/2020/movies
+* Vote up and down a Movie picture
+  * A client can only vote once per movie, we ensure that with the MovieRating Entity
+    http://movies.testmycloud.net/swagger-ui/index.html#/movie-rating-controller/voteUp
+    http://movies.testmycloud.net/swagger-ui/index.html#/movie-rating-controller/voteDown
+* The details associated with a Movie picture
+http://movies.testmycloud.net/api/movies/1
+
+
+
 
 
 
