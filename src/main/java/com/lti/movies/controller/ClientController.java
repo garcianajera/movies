@@ -2,12 +2,12 @@ package com.lti.movies.controller;
 
 import com.lti.movies.dto.ClientDto;
 import com.lti.movies.service.ClientService;
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,7 +40,7 @@ public class ClientController {
                     schema = @Schema(implementation = ClientDto.class))})
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public ClientDto createClient(@RequestBody ClientDto client) {
+    public ClientDto createClient(@Valid @RequestBody ClientDto client) {
         return clientService.createClient(client);
     }
 }

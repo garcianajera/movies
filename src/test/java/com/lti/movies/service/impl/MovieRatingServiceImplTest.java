@@ -136,13 +136,7 @@ class MovieRatingServiceImplTest {
         int clientId = 567;
         Client client = new Client(clientId, "John");
 
-        Movie movie = new Movie();
         int movieId = 123;
-        movie.setId(movieId);
-        movie.setTitle("title");
-        movie.setReleaseYear(new ReleaseYear(2020));
-
-
         MovieRatingServiceImpl movieRatingService = new MovieRatingServiceImpl(null, null, null, null, null);
 
         MovieRatingKey movieRatingKey = new MovieRatingKey(movieId, clientId);
