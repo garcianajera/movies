@@ -60,7 +60,7 @@ https://github.com/garcianajera/movies/actions
 * List all of the available Movie pictures grouped by Release year
   * We use a release year entity to group movies by year. (I will change the endpoint name in next version)
   * Results order by year and movie rating
-    http://movies.testmycloud.net/api/releaseYears
+    http://movies.testmycloud.net/api/releaseYears/movies
 * List all of the available Movie pictures of a particular Release year
     http://movies.testmycloud.net/api/releaseYears/2020/movies
 * Vote up and down a Movie picture
