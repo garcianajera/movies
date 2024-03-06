@@ -14,8 +14,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Date;
+import java.util.List;
 
 import static org.hamcrest.Matchers.is;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -84,5 +86,26 @@ class MovieRatingControllerTest {
                 .andExpect(jsonPath("$.clientRating", is(1)));
     }
 
+    @Test
+    public void testGetAllMovieRatings() throws Exception {
+        Date today = new Date();
+        int movieId = 12;
+        int clientId = 123;
+        MovieRatingDto movieRating = buildMovieRating(today, movieId, clientId);
+
+        Mockito.when(movieRatingService.getMovieRatings()).thenReturn(List.of(movieRating));
+
+        mockMvc.perform(get(API_MOVIES_BASE_URL)) //
+                .andExpect(status().isOk()) //
+                .andExpect(jsonPath("$[0].movie.id", is(12))) //
+                .andExpect(jsonPath("$[0].movie.title", is("Rambo")))
+                .andExpect(jsonPath("$[0].movie.rating", is(10)))
+                .andExpect(jsonPath("$[0].client.id", is(123)))
+                .andExpect(jsonPath("$[0].client.userName", is("John")))
+                .andExpect(jsonPath("$[0].clientRating", is(1)));
+
+        Mockito.verify(movieRatingService, Mockito.times(1)).getMovieRatings();
+
+    }
 
 }

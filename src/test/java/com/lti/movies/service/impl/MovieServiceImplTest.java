@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -95,6 +96,27 @@ class MovieServiceImplTest {
         assertEquals("Rambo", movieDto.getTitle());
         assertEquals(123, movieDto.getId());
         assertEquals(2020, movieDto.getYear());
+    }
+
+    @Test
+    void getAllMovies() {
+        MovieRepository movieRepository = Mockito.mock(MovieRepository.class);
+        Integer year = 2020;
+        ReleaseYear releaseYear = new ReleaseYear(year);
+
+        Movie movie = new Movie();
+        int movieId = 123;
+        movie.setId(movieId);
+        movie.setTitle("Rambo");
+        movie.setReleaseYear(releaseYear);
+        Mockito.when(movieRepository.findAll()).thenReturn(List.of(movie));
+        MovieService movieService = new MovieServiceImpl(movieRepository, null, mapper);
+
+        List<MovieDto> movieDtoList = movieService.getAllMovies();
+
+        assertEquals("Rambo", movieDtoList.get(0).getTitle());
+        assertEquals(123, movieDtoList.get(0).getId());
+        assertEquals(2020, movieDtoList.get(0).getYear());
     }
 
     @Test

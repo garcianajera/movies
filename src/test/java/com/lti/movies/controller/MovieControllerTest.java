@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.net.URL;
+import java.util.List;
 
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -52,6 +53,28 @@ class MovieControllerTest {
                 .andExpect(jsonPath("$.rating", is(1)));
 
         Mockito.verify(movieService, Mockito.times(1)).getMovieById(movieId);
+    }
+
+    @Test
+    void getGetAllMovies() throws Exception {
+        MovieDto movieExpected = new MovieDto();
+        movieExpected.setTitle("Minions");
+        int movieId = 123;
+        movieExpected.setId(movieId);
+        int year = 2020;
+        movieExpected.setYear(year);
+        movieExpected.setRating(1);
+
+        Mockito.when(movieService.getAllMovies()).thenReturn(List.of(movieExpected));
+
+        mockMvc.perform(get(API_MOVIES_BASE_URL)) //
+                .andExpect(status().isOk()) //
+                .andExpect(jsonPath("$[0].id", is(movieId)))//
+                .andExpect(jsonPath("$[0].title", is("Minions")))
+                .andExpect(jsonPath("$[0].year", is(year)))
+                .andExpect(jsonPath("$[0].rating", is(1)));
+
+        Mockito.verify(movieService, Mockito.times(1)).getAllMovies();
     }
 
     @Test

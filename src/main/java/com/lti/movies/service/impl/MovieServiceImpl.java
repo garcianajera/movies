@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class MovieServiceImpl implements MovieService {
@@ -49,6 +50,11 @@ public class MovieServiceImpl implements MovieService {
     public MovieDto addClientRating(Integer movieId, Integer clientRating) {
         Movie movie = modifyMovieRating(movieId, clientRating);
         return mapper.movieToMovieDto(movieRepository.save(movie));
+    }
+
+    @Override
+    public List<MovieDto> getAllMovies() {
+        return mapper.movieToDtoList(movieRepository.findAll());
     }
 
     Movie modifyMovieRating(Integer movieId, int vote) {

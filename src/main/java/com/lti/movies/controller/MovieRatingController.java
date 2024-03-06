@@ -3,13 +3,20 @@ package com.lti.movies.controller;
 import com.lti.movies.dto.MovieRatingDto;
 import com.lti.movies.service.MovieRatingService;
 import io.swagger.v3.oas.annotations.Operation;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping("/api/movieRatings")
+@Tag(name = "Movies Ratings")
 public class MovieRatingController {
 
     private final MovieRatingService movieRatingService;
@@ -29,4 +36,15 @@ public class MovieRatingController {
     public MovieRatingDto voteDown(@PathVariable Integer movieId, @PathVariable Integer clientId) {
         return movieRatingService.voteDown(movieId, clientId);
     }
+
+    @Operation(summary = "Get all movie ratings")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Found movie ratings",
+                    content = {@Content(mediaType = APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = MovieRatingDto.class))})})
+    @GetMapping()
+    public List<MovieRatingDto> getMovieRatingsByMovie() {
+        return movieRatingService.getMovieRatings();
+    }
+
 }

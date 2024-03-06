@@ -44,7 +44,7 @@ class ReleaseYearControllerTest {
 
         Mockito.when(releaseYearService.findAllYears()).thenReturn(List.of(releaseYear2010));
 
-        mockMvc.perform(get(API_RELEASE_YEAR_BASE_URL)) //
+        mockMvc.perform(get(API_RELEASE_YEAR_BASE_URL + "/movies")) //
                 .andExpect(status().isOk()) //
                 .andExpect(jsonPath("$[0].year", is(2010)))//
                 .andExpect(jsonPath("$[0].movies[0].id", is(123)))

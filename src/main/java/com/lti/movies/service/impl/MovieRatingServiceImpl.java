@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -43,6 +44,11 @@ public class MovieRatingServiceImpl implements MovieRatingService {
     @Override
     public MovieRatingDto voteDown(Integer movieId, Integer clientId) {
         return modifyMovieRating(movieId, clientId, -1);
+    }
+
+    @Override
+    public List<MovieRatingDto> getMovieRatings() {
+        return mapper.movieRatingToDtoList(movieRatingRepository.findAll());
     }
 
     private MovieRatingDto modifyMovieRating(Integer movieId, Integer clientId, int vote) {

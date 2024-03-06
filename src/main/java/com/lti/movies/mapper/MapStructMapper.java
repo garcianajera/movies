@@ -39,4 +39,6 @@ public interface MapStructMapper {
 
     MovieRatingDto movieRatingToDto(MovieRating movieRating);
 
+    List<MovieRatingDto> movieRatingToDtoList(List<MovieRating> movieRating);
+
 }
