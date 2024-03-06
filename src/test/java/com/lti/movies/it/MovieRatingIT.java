@@ -55,7 +55,7 @@ public class MovieRatingIT {
 
         //create a user
         ClientDto clientDto = new ClientDto();
-        clientDto.setUserName("userTest");
+        clientDto.setUserName("userTest 2");
         clientDto = restTemplate.postForObject(baseUrl + "/clients", clientDto, ClientDto.class);
         //create a movie
         MovieDto movieDto = new MovieDto();
